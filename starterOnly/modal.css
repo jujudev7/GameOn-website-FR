@@ -16,7 +16,7 @@ body {
   flex-direction: column;
   background-image: url("background.png");
   font-family: var(--font-default);
-  font-size: 18px;
+  font-size: 15px;
   max-width: 1300px;
   margin: 0 auto;
 }
@@ -188,12 +188,13 @@ main {
   margin: 15px auto;
 }
 
-label {
+label,.tournaments {
   font-family: var(--font-default);
-  font-size: 17px;
+  font-size: 15px;
   font-weight: normal;
   display: inline-block;
-  margin-bottom: 11px;
+  margin-top: 12px;
+  margin-bottom: 5px;
 }
 input {
   padding: 8px;

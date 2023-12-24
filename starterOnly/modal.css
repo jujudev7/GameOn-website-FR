@@ -245,7 +245,7 @@ input[data-error]::after {
   display: block;
   width: 20px;
   height: 20px;
-  border: 2px solid #279e7a;
+  border: 2px solid #fff;
   border-radius: 50%;
   text-indent: 29px;
   white-space: nowrap;
@@ -260,6 +260,7 @@ input[data-error]::after {
   width: 13px;
   height: 13px;
   background-color: #279e7a;
+  border-spacing: 2px;
   border-radius: 50%;
   text-indent: 29px;
   white-space: nowrap;
@@ -269,6 +270,9 @@ input[data-error]::after {
   transform: translate(-50%, -50%);
   transition: 0.3s;
   opacity: 0;
+}
+input[type="radio"]:checked + label .checkbox-icon {
+  border: 2px solid #279e7a;
 }
 .checkbox-input {
   display: none;

@@ -14,7 +14,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("background.png");
+  /* background-image: url("background.png"); */
   font-family: var(--font-default);
   font-size: 15px;
   max-width: 1300px;
@@ -201,6 +201,15 @@ input {
   border: 0.8px solid #ccc;
   outline: none;
 }
+
+input.invalid {
+  border: 2px solid red;
+}
+
+input.valid {
+  border: 2px solid rgb(0, 255, 21);
+}
+
 .text-control {
   margin: 0;
   padding: 8px;

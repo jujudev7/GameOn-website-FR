@@ -48,6 +48,8 @@ function validate() {
   const checkbox1 = document.getElementById("checkbox1").checked;
 
   let inputs = document.querySelectorAll("input");
+  // console.log("000000000001:" + inputs);
+
   const inputFirstname = document.getElementById("firstname"); // on sélectionne chaque input afin d'indiquer à l'utilisateur si le champ est valide ou non
   const inputLastname = document.getElementById("lastname");
   const inputEmail = document.getElementById("email");
@@ -58,52 +60,59 @@ function validate() {
   // const emailRegExp = new RegExp("[\w]+@[\w-]+\\.[\w]{2,4}");
   const emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+$");
 
- 
   let isValid = true;
 
   inputs.forEach(function (input) {
-    // Code à exécuter pour chaque élément input via une fonction anonyme
+    // console.log("000000000002:" + input);
+    input.classList.add("invalid");
+    /*
     if (input.value.trim() === "" || input.value.trim() === !isValid) {
-      input.classList.add("invalid"); // Ajoute une classe "invalid" lorsque le champ est vide
+      input.classList.add("invalid");
       isValid = false;
     } else {
       input.classList.remove("invalid");
     }
+    */
   });
+  console.log("000000000001" + firstname);
 
   // // Validation du prénom
   if (firstname.trim() == "") {
-    alert("Veuillez saisir votre prénom.");
+    alert("Veuillez renseigner votre prénom svp");
+    inputFirstname.classList.add("invalid");
     return false;
-  }
-
-  if (firstname.trim().length < 2) {
-    alert("Votre prénom est trop court.");
+  } else if (firstname.trim().length < 2) {
+    alert("Votre prénom est trop court !");
+    inputFirstname.classList.add("invalid");
+    inputFirstname.classList.remove("valid");
     return false;
   } else {
-    inputFirstname.classList.add("valid"); // Ajoute une classe "valid" lorsque le champ est rempli
+    inputFirstname.classList.add("valid");
   }
 
   // // Validation du nom
   if (lastname.trim() == "") {
-    alert("Veuillez saisir votre nom.");
+    alert("Veuillez renseigner votre nom de famille svp");
+    inputLastname.classList.add("invalid");
     return false;
   } else if (lastname.trim().length < 2) {
-    alert("Votre nom de famille est trop court.");
+    alert("Votre nom est trop court !");
+    inputLastname.classList.add("invalid");
+    inputLastname.classList.remove("valid");
     return false;
   } else {
-    inputLastname.classList.add("valid"); // Ajoute une classe "valid" lorsque le champ est rempli
+    inputLastname.classList.add("valid");
   }
 
-  // // Validation de l'e-mail
-  // Ici, vous pouvez utiliser une expression régulière pour valider l'e-mail
-  // Dans cet exemple, la validation est simple (doit contenir '@' et '.')
-  if (!emailRegExp.test(email)) {
-    alert("Veuillez saisir une adresse e-mail valide.");
-    return false;
-  } else {
-    inputEmail.classList.add("valid"); // Ajoute une classe "valid" lorsque le champ est rempli
-  }
+  // // // Validation de l'e-mail
+  // // Ici, vous pouvez utiliser une expression régulière pour valider l'e-mail
+  // // Dans cet exemple, la validation est simple (doit contenir '@' et '.')
+  // if (!emailRegExp.test(email)) {
+  //   alert("Veuillez saisir une adresse e-mail valide.");
+  //   return false;
+  // } else {
+  //   inputEmail.classList.add("valid"); // Ajoute une classe "valid" lorsque le champ est rempli
+  // }
 
   // // Validation de la date de naissance
   // // Vous pouvez ajouter une validation plus spécifique si nécessaire

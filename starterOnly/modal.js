@@ -59,49 +59,55 @@ function validate() {
   const inputCheckbox1 = document.querySelector(".cgu .checkbox-icon");
   // const emailRegExp = new RegExp("[\w]+@[\w-]+\\.[\w]{2,4}");
   const emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+$");
+  
+  const errorFirstname = document.getElementById("error-firstname");
+  const errorLastname = document.getElementById("error-lastname");
 
   let isValid = true;
 
-  inputs.forEach(function (input) {
-    // console.log("000000000002:" + input);
-    input.classList.add("invalid");
-    /*
-    if (input.value.trim() === "" || input.value.trim() === !isValid) {
-      input.classList.add("invalid");
-      isValid = false;
-    } else {
-      input.classList.remove("invalid");
-    }
-    */
-  });
+  // inputs.forEach(function (input) {
+  //   // console.log("000000000002:" + input);
+  //   input.classList.add("invalid");
+  //   /*
+  //   if (input.value.trim() === "" || input.value.trim() === !isValid) {
+  //     input.classList.add("invalid");
+  //     isValid = false;
+  //   } else {
+  //     input.classList.remove("invalid");
+  //   }
+  //   */
+  // });
   console.log("000000000001" + firstname);
 
   // // Validation du prénom
   if (firstname.trim() == "") {
-    alert("Veuillez renseigner votre prénom svp");
+    errorFirstname.textContent = "Veuillez renseigner votre prénom svp";
     inputFirstname.classList.add("invalid");
-    return false;
+    isValid = false;
   } else if (firstname.trim().length < 2) {
-    alert("Votre prénom est trop court !");
+    errorFirstname.textContent = "Votre prénom est trop court !";
     inputFirstname.classList.add("invalid");
     inputFirstname.classList.remove("valid");
-    return false;
+    isValid = false;
   } else {
     inputFirstname.classList.add("valid");
+    errorFirstname.textContent = "";
   }
 
   // // Validation du nom
   if (lastname.trim() == "") {
-    alert("Veuillez renseigner votre nom de famille svp");
+    errorLastname.textContent = "Veuillez renseigner votre nom de famille svp";
     inputLastname.classList.add("invalid");
-    return false;
+    isValid = false;
   } else if (lastname.trim().length < 2) {
-    alert("Votre nom est trop court !");
+    errorLastname.textContent = "Votre nom est trop court !";
+
     inputLastname.classList.add("invalid");
     inputLastname.classList.remove("valid");
-    return false;
+    isValid = false;
   } else {
     inputLastname.classList.add("valid");
+    errorLastname.textContent = "";
   }
 
   // // // Validation de l'e-mail

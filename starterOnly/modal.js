@@ -57,11 +57,18 @@ function validate() {
   const inputQuantity = document.getElementById("#quantity");
   const checkboxIcons = document.querySelectorAll(".location .checkbox-icon");
   const inputCheckbox1 = document.querySelector(".cgu .checkbox-icon");
-  // const emailRegExp = new RegExp("[\w]+@[\w-]+\\.[\w]{2,4}");
-  const emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+$");
+
+  const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]{2,4}$/;
+  // ^: Début de la chaîne.
+  // [^\s@]+: Un ou plusieurs caractères qui ne sont ni des espaces ni des "@", pour la partie avant le "@".
+  // @: Le caractère "@".
+  // [^\s@]+: Un ou plusieurs caractères qui ne sont ni des espaces ni des "@", pour la partie après le "@".
+  // \.: Le caractère "." (point), qui est échappé car il a une signification spéciale en regex.
+  // [^\s@]{2,4}: indique que la séquence de caractères après le dernier point "." (dans le nom de domaine) doit contenir entre 2 et 4 caractères qui ne sont ni des espaces ni des "@" jusqu'à la fin de la chaîne $.
   
   const errorFirstname = document.getElementById("error-firstname");
   const errorLastname = document.getElementById("error-lastname");
+  const errorEmail = document.getElementById("error-email");
 
   let isValid = true;
 
@@ -113,12 +120,15 @@ function validate() {
   // // // Validation de l'e-mail
   // // Ici, vous pouvez utiliser une expression régulière pour valider l'e-mail
   // // Dans cet exemple, la validation est simple (doit contenir '@' et '.')
-  // if (!emailRegExp.test(email)) {
-  //   alert("Veuillez saisir une adresse e-mail valide.");
-  //   return false;
-  // } else {
-  //   inputEmail.classList.add("valid"); // Ajoute une classe "valid" lorsque le champ est rempli
-  // }
+  if (!emailRegExp.test(email)) {
+    errorEmail.textContent = "Veuillez saisir une adresse e-mail valide svp";
+    inputEmail.classList.add("invalid");
+    inputEmail.classList.remove("valid");
+    isValid = false;
+  } else {
+    inputEmail.classList.add("valid"); // Ajoute une classe "valid" lorsque le champ est rempli
+    errorEmail.textContent = "";
+  }
 
   // // Validation de la date de naissance
   // // Vous pouvez ajouter une validation plus spécifique si nécessaire

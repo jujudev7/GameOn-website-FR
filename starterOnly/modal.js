@@ -42,7 +42,7 @@ function validate() {
   const firstname = document.getElementById("firstname").value;
   const lastname = document.getElementById("lastname").value;
   const email = document.getElementById("email").value;
-  const birthdate = document.getElementById("birthdate").value;
+  // const birthdate = document.getElementById("birthdate").value;
   const quantity = document.getElementById("quantity").value;
   const location = document.querySelector('input[name="location"]:checked');
   const checkbox1 = document.getElementById("checkbox1").checked;
@@ -58,17 +58,18 @@ function validate() {
   const checkboxIcons = document.querySelectorAll(".location .checkbox-icon");
   const inputCheckbox1 = document.querySelector(".cgu .checkbox-icon");
 
-  const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]{2,4}$/;
+  const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   // ^: Début de la chaîne.
   // [^\s@]+: Un ou plusieurs caractères qui ne sont ni des espaces ni des "@", pour la partie avant le "@".
   // @: Le caractère "@".
   // [^\s@]+: Un ou plusieurs caractères qui ne sont ni des espaces ni des "@", pour la partie après le "@".
   // \.: Le caractère "." (point), qui est échappé car il a une signification spéciale en regex.
-  // [^\s@]{2,4}: indique que la séquence de caractères après le dernier point "." (dans le nom de domaine) doit contenir entre 2 et 4 caractères qui ne sont ni des espaces ni des "@" jusqu'à la fin de la chaîne $.
-  
+  // [^\s@]{2,}: indique que la séquence de caractères après le dernier point "." (l'extension du nom de domaine) doit contenir au minimum 2 caractères qui ne sont ni des espaces ni des "@" jusqu'à la fin de la chaîne $.
+
   const errorFirstname = document.getElementById("error-firstname");
   const errorLastname = document.getElementById("error-lastname");
   const errorEmail = document.getElementById("error-email");
+  const errorBirthdate = document.getElementById("error-birthdate");
 
   let isValid = true;
 
@@ -118,24 +119,73 @@ function validate() {
   }
 
   // // // Validation de l'e-mail
-  // // Ici, vous pouvez utiliser une expression régulière pour valider l'e-mail
-  // // Dans cet exemple, la validation est simple (doit contenir '@' et '.')
   if (!emailRegExp.test(email)) {
     errorEmail.textContent = "Veuillez saisir une adresse e-mail valide svp";
     inputEmail.classList.add("invalid");
     inputEmail.classList.remove("valid");
     isValid = false;
   } else {
-    inputEmail.classList.add("valid"); // Ajoute une classe "valid" lorsque le champ est rempli
+    inputEmail.classList.add("valid");
     errorEmail.textContent = "";
   }
 
-  // // Validation de la date de naissance
-  // // Vous pouvez ajouter une validation plus spécifique si nécessaire
-  // if (birthdate.trim() == "") {
-  //   alert("Veuillez saisir votre date de naissance.");
-  //   return false;
-  // }
+  // Validation de la date de naissance
+  // Récupérer la valeur de la date de naissance depuis le champ de saisie
+  var birthdate = document.getElementById("birthdate").value;
+
+  // Vérifier si une date a été saisie
+  if (birthdate) {
+    // Créer un objet Date à partir de la chaîne de date saisie
+    var birthdateUser = new Date(birthdate);
+    console.log("birthdate = " + birthdateUser);
+    // Vérifier si la date est valide
+    if (!isNaN(birthdateUser.getTime())) {
+      // Calculer l'âge de l'utilisateur
+      var age = calculateAge(birthdateUser);
+      if (birthdateUser < new Date("1900-01-01")) {
+        //  alert("Veuillez entrer votre date de naissance svp");
+        errorBirthdate.textContent = "Veuillez entrer une date de naissance valide svp";
+        inputBirthdate.classList.add("invalid");
+        inputBirthdate.classList.remove("valid");
+        isValid = false;
+      }
+      // Vérifier si l'utilisateur a plus de 18 ans
+      else if (age >= 13 ) {
+        //  alert("Vous avez plus de 13 ans.");
+        inputBirthdate.classList.add("valid");
+        errorBirthdate.textContent = "";
+      } else {
+        //  alert("Désolé, vous n'avez pas l'âge requis pour participer");
+        errorBirthdate.textContent =
+          "Désolé, vous n'avez pas l'âge requis pour participer !";
+        inputBirthdate.classList.add("invalid");
+        inputBirthdate.classList.remove("valid");
+        isValid = false;
+      }
+    } 
+  } else {
+    //  alert("Veuillez entrer votre date de naissance svp");
+    errorBirthdate.textContent = "Veuillez entrer votre date de naissance svp";
+    inputBirthdate.classList.add("invalid");
+    inputBirthdate.classList.remove("valid");
+    isValid = false;
+  }
+
+  function calculateAge(birthdateUser) {
+    var currentDate = new Date();
+    var age = currentDate.getFullYear() - birthdateUser.getFullYear();
+
+    // Vérifier si l'anniversaire de l'utilisateur n'a pas encore eu lieu cette année
+    if (
+      currentDate.getMonth() < birthdateUser.getMonth() ||
+      (currentDate.getMonth() === birthdateUser.getMonth() &&
+        currentDate.getDate() < birthdateUser.getDate())
+    ) {
+      age--;
+    }
+
+    return age;
+  }
 
   // // Validation de la quantité de tournois
   // if (quantity.trim() == "" || isNaN(quantity)) {

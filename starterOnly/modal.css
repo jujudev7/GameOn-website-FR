@@ -202,7 +202,7 @@ input {
   outline: none;
 }
 
-#error-firstname, #error-lastname, #error-email {
+#error-firstname, #error-lastname, #error-email, #error-birthdate {
   font-size: 0.7em;
   color: red;
 }

@@ -42,7 +42,7 @@ function validate() {
   const firstname = document.getElementById("firstname").value;
   const lastname = document.getElementById("lastname").value;
   const email = document.getElementById("email").value;
-  // const birthdate = document.getElementById("birthdate").value;
+  const birthdate = document.getElementById("birthdate").value;
   const quantity = document.getElementById("quantity").value;
   const location = document.querySelector('input[name="location"]:checked');
   const checkbox1 = document.getElementById("checkbox1").checked;
@@ -54,7 +54,7 @@ function validate() {
   const inputLastname = document.getElementById("lastname");
   const inputEmail = document.getElementById("email");
   const inputBirthdate = document.getElementById("birthdate");
-  const inputQuantity = document.getElementById("#quantity");
+  const inputQuantity = document.getElementById("quantity");
   const checkboxIcons = document.querySelectorAll(".location .checkbox-icon");
   const inputCheckbox1 = document.querySelector(".cgu .checkbox-icon");
 
@@ -70,6 +70,7 @@ function validate() {
   const errorLastname = document.getElementById("error-lastname");
   const errorEmail = document.getElementById("error-email");
   const errorBirthdate = document.getElementById("error-birthdate");
+  const errorQuantity = document.getElementById("error-quantity");
 
   let isValid = true;
 
@@ -118,7 +119,7 @@ function validate() {
     errorLastname.textContent = "";
   }
 
-  // // // Validation de l'e-mail
+  // Validation de l'e-mail
   if (!emailRegExp.test(email)) {
     errorEmail.textContent = "Veuillez saisir une adresse e-mail valide svp";
     inputEmail.classList.add("invalid");
@@ -129,28 +130,29 @@ function validate() {
     errorEmail.textContent = "";
   }
 
-  // Validation de la date de naissance
-  // Récupérer la valeur de la date de naissance depuis le champ de saisie
-  var birthdate = document.getElementById("birthdate").value;
+  //////////////////////////////////////////
+  //  Validation de la date de naissance  //
+  //////////////////////////////////////////
 
   // Vérifier si une date a été saisie
   if (birthdate) {
     // Créer un objet Date à partir de la chaîne de date saisie
-    var birthdateUser = new Date(birthdate);
+    const birthdateUser = new Date(birthdate);
     console.log("birthdate = " + birthdateUser);
     // Vérifier si la date est valide
     if (!isNaN(birthdateUser.getTime())) {
       // Calculer l'âge de l'utilisateur
-      var age = calculateAge(birthdateUser);
+      const age = calculateAge(birthdateUser);
       if (birthdateUser < new Date("1900-01-01")) {
         //  alert("Veuillez entrer votre date de naissance svp");
-        errorBirthdate.textContent = "Veuillez entrer une date de naissance valide svp";
+        errorBirthdate.textContent =
+          "Veuillez entrer une date de naissance valide svp";
         inputBirthdate.classList.add("invalid");
         inputBirthdate.classList.remove("valid");
         isValid = false;
       }
       // Vérifier si l'utilisateur a plus de 18 ans
-      else if (age >= 13 ) {
+      else if (age >= 13) {
         //  alert("Vous avez plus de 13 ans.");
         inputBirthdate.classList.add("valid");
         errorBirthdate.textContent = "";
@@ -162,7 +164,7 @@ function validate() {
         inputBirthdate.classList.remove("valid");
         isValid = false;
       }
-    } 
+    }
   } else {
     //  alert("Veuillez entrer votre date de naissance svp");
     errorBirthdate.textContent = "Veuillez entrer votre date de naissance svp";
@@ -172,8 +174,8 @@ function validate() {
   }
 
   function calculateAge(birthdateUser) {
-    var currentDate = new Date();
-    var age = currentDate.getFullYear() - birthdateUser.getFullYear();
+    const currentDate = new Date();
+    const age = currentDate.getFullYear() - birthdateUser.getFullYear();
 
     // Vérifier si l'anniversaire de l'utilisateur n'a pas encore eu lieu cette année
     if (
@@ -187,11 +189,18 @@ function validate() {
     return age;
   }
 
-  // // Validation de la quantité de tournois
-  // if (quantity.trim() == "" || isNaN(quantity)) {
-  //   alert("Veuillez saisir un nombre valide pour la quantité de tournois.");
-  //   return false;
-  // }
+  // Validation de la quantité de tournois
+    if (quantity.trim() == "" || quantity.trim() > 99) {
+    errorQuantity.textContent =
+      "Veuillez saisir un nombre valide de tournois svp";
+    inputQuantity.classList.add("invalid");
+    inputQuantity.classList.remove("valid");
+    isValid = false;
+  } else {
+    inputQuantity.classList.add("valid");
+    inputQuantity.classList.remove("invalid");
+    errorQuantity.textContent = "";
+  }
 
   // // Validation du choix de location
   // if (!location) {

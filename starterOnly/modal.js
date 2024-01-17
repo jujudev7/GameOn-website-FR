@@ -44,7 +44,9 @@ function validate() {
   const email = document.getElementById("email").value;
   const birthdate = document.getElementById("birthdate").value;
   const quantity = document.getElementById("quantity").value;
+  // const location = document.querySelector('input[name="location"]:checked').value;
   const location = document.querySelector('input[name="location"]:checked');
+
   const checkbox1 = document.getElementById("checkbox1").checked;
 
   let inputs = document.querySelectorAll("input");
@@ -55,7 +57,7 @@ function validate() {
   const inputEmail = document.getElementById("email");
   const inputBirthdate = document.getElementById("birthdate");
   const inputQuantity = document.getElementById("quantity");
-  const checkboxIcons = document.querySelectorAll(".location .checkbox-icon");
+  const radioBtnIcons = document.querySelectorAll(".location .checkbox-icon");
   const inputCheckbox1 = document.querySelector(".cgu .checkbox-icon");
 
   const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -71,6 +73,7 @@ function validate() {
   const errorEmail = document.getElementById("error-email");
   const errorBirthdate = document.getElementById("error-birthdate");
   const errorQuantity = document.getElementById("error-quantity");
+  const errorLocation = document.getElementById("error-location");
 
   let isValid = true;
 
@@ -151,13 +154,11 @@ function validate() {
         inputBirthdate.classList.remove("valid");
         isValid = false;
       }
-      // Vérifier si l'utilisateur a plus de 18 ans
+      // Vérifier si l'utilisateur a plus de 13 ans
       else if (age >= 13) {
-        //  alert("Vous avez plus de 13 ans.");
         inputBirthdate.classList.add("valid");
         errorBirthdate.textContent = "";
       } else {
-        //  alert("Désolé, vous n'avez pas l'âge requis pour participer");
         errorBirthdate.textContent =
           "Désolé, vous n'avez pas l'âge requis pour participer !";
         inputBirthdate.classList.add("invalid");
@@ -166,7 +167,6 @@ function validate() {
       }
     }
   } else {
-    //  alert("Veuillez entrer votre date de naissance svp");
     errorBirthdate.textContent = "Veuillez entrer votre date de naissance svp";
     inputBirthdate.classList.add("invalid");
     inputBirthdate.classList.remove("valid");
@@ -191,8 +191,7 @@ function validate() {
 
   // Validation de la quantité de tournois
     if (quantity.trim() == "" || quantity.trim() > 99) {
-    errorQuantity.textContent =
-      "Veuillez saisir un nombre valide de tournois svp";
+    errorQuantity.textContent = "Veuillez saisir un nombre valide de tournois svp";
     inputQuantity.classList.add("invalid");
     inputQuantity.classList.remove("valid");
     isValid = false;
@@ -202,11 +201,19 @@ function validate() {
     errorQuantity.textContent = "";
   }
 
-  // // Validation du choix de location
-  // if (!location) {
-  //   alert("Veuillez sélectionner une location.");
-  //   return false;
-  // }
+  // Validation choix ville
+  if (location == null) {
+    errorLocation.textContent = "Veuillez choisir une ville svp";
+
+    for (let i = 0; i < radioBtnIcons.length; i++) {
+      radioBtnIcons[i].style.border = "2px solid red";
+    }
+  } else {
+    errorLocation.textContent = "";
+    for (let i = 0; i < radioBtnIcons.length; i++) {
+      radioBtnIcons[i].style.border = "";
+    }
+  }
 
   // // Validation de la case à cocher des conditions d'utilisation
   // if (!checkbox1) {

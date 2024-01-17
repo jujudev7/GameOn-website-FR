@@ -35,10 +35,10 @@ img {
   margin: 3.5%;
 }
 .header-logo {
-    float: left;
+  float: left;
 }
 .main-navbar {
-    float: right;
+  float: right;
 }
 .topnav a {
   float: left;
@@ -69,7 +69,9 @@ img {
 }
 
 @media screen and (max-width: 768px) {
-  .topnav a {display: none;}
+  .topnav a {
+    display: none;
+  }
   .topnav a.icon {
     float: right;
     display: block;
@@ -77,7 +79,9 @@ img {
 }
 
 @media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
+  .topnav.responsive {
+    position: relative;
+  }
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
@@ -90,16 +94,16 @@ img {
   }
 }
 
-
-
- @media screen and (max-width: 540px) {
-  .topnav a {display: none;}
+@media screen and (max-width: 540px) {
+  .topnav a {
+    display: none;
+  }
   .topnav a.icon {
     float: right;
     display: block;
     margin-top: -15px;
   }
-} 
+}
 
 main {
   font-size: 130%;
@@ -111,8 +115,6 @@ main {
   margin: 1px 20px 15px;
   border-radius: 2rem;
   text-align: justify;
-
-
 }
 
 .modal-btn {
@@ -188,7 +190,8 @@ main {
   margin: 15px auto;
 }
 
-label,.tournaments {
+label,
+.tournaments {
   font-family: var(--font-default);
   font-size: 15px;
   font-weight: normal;
@@ -202,7 +205,12 @@ input {
   outline: none;
 }
 
-#error-firstname, #error-lastname, #error-email, #error-birthdate, #error-quantity {
+#error-firstname,
+#error-lastname,
+#error-email,
+#error-birthdate,
+#error-quantity,
+#error-location {
   font-size: 0.7em;
   color: red;
 }
@@ -286,7 +294,8 @@ input[data-error]::after {
   opacity: 0;
 }
 input[type="radio"]:checked + label .checkbox-icon {
-  border: 2px solid #279e7a;
+  /* border: 2px solid #279e7a; */
+  border: 2px solid rgb(0, 255, 21);
 }
 .checkbox-input {
   display: none;
@@ -545,4 +554,3 @@ footer {
     opacity: 1;
   }
 }
-

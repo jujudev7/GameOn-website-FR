@@ -35,6 +35,9 @@ const form = document.querySelector("form");
 form.addEventListener("submit", (event) => {
   // On empêche le comportement par défaut
   event.preventDefault();
+  if (validate()) {
+    closeModal();
+  }
 });
 
 function validate() {
@@ -44,13 +47,8 @@ function validate() {
   const email = document.getElementById("email").value;
   const birthdate = document.getElementById("birthdate").value;
   const quantity = document.getElementById("quantity").value;
-  // const location = document.querySelector('input[name="location"]:checked').value;
   const location = document.querySelector('input[name="location"]:checked');
-
   const checkbox1 = document.getElementById("checkbox1").checked;
-
-  let inputs = document.querySelectorAll("input");
-  // console.log("000000000001:" + inputs);
 
   const inputFirstname = document.getElementById("firstname"); // on sélectionne chaque input afin d'indiquer à l'utilisateur si le champ est valide ou non
   const inputLastname = document.getElementById("lastname");
@@ -74,22 +72,9 @@ function validate() {
   const errorBirthdate = document.getElementById("error-birthdate");
   const errorQuantity = document.getElementById("error-quantity");
   const errorLocation = document.getElementById("error-location");
+  const errorCgu = document.getElementById("error-cgu");
 
   let isValid = true;
-
-  // inputs.forEach(function (input) {
-  //   // console.log("000000000002:" + input);
-  //   input.classList.add("invalid");
-  //   /*
-  //   if (input.value.trim() === "" || input.value.trim() === !isValid) {
-  //     input.classList.add("invalid");
-  //     isValid = false;
-  //   } else {
-  //     input.classList.remove("invalid");
-  //   }
-  //   */
-  // });
-  console.log("000000000001" + firstname);
 
   // // Validation du prénom
   if (firstname.trim() == "") {
@@ -137,37 +122,27 @@ function validate() {
   //  Validation de la date de naissance  //
   //////////////////////////////////////////
 
-  // Vérifier si une date a été saisie
-  if (birthdate) {
-    // Créer un objet Date à partir de la chaîne de date saisie
-    const birthdateUser = new Date(birthdate);
-    console.log("birthdate = " + birthdateUser);
-    // Vérifier si la date est valide
-    if (!isNaN(birthdateUser.getTime())) {
-      // Calculer l'âge de l'utilisateur
-      const age = calculateAge(birthdateUser);
-      if (birthdateUser < new Date("1900-01-01")) {
-        //  alert("Veuillez entrer votre date de naissance svp");
-        errorBirthdate.textContent =
-          "Veuillez entrer une date de naissance valide svp";
-        inputBirthdate.classList.add("invalid");
-        inputBirthdate.classList.remove("valid");
-        isValid = false;
-      }
-      // Vérifier si l'utilisateur a plus de 13 ans
-      else if (age >= 13) {
-        inputBirthdate.classList.add("valid");
-        errorBirthdate.textContent = "";
-      } else {
-        errorBirthdate.textContent =
-          "Désolé, vous n'avez pas l'âge requis pour participer !";
-        inputBirthdate.classList.add("invalid");
-        inputBirthdate.classList.remove("valid");
-        isValid = false;
-      }
-    }
-  } else {
+  const birthdateUser = new Date(birthdate);
+  const age = calculateAge(birthdateUser);
+
+  if (birthdate == "") {
     errorBirthdate.textContent = "Veuillez entrer votre date de naissance svp";
+    inputBirthdate.classList.add("invalid");
+    inputBirthdate.classList.remove("valid");
+    isValid = false;
+  } else if (birthdateUser >= new Date("1900-01-01") && age >= 13) {
+    errorBirthdate.textContent = "";
+    inputBirthdate.classList.add("valid");
+    inputBirthdate.classList.remove("invalid");
+  } else if (birthdateUser < new Date("1900-01-01")) {
+    errorBirthdate.textContent =
+      "Veuillez entrer une date de naissance valide svp";
+    inputBirthdate.classList.add("invalid");
+    inputBirthdate.classList.remove("valid");
+    isValid = false;
+  } else if (age < 13) {
+    errorBirthdate.textContent =
+      "Désolé, vous n'avez pas l'âge requis pour participer !";
     inputBirthdate.classList.add("invalid");
     inputBirthdate.classList.remove("valid");
     isValid = false;
@@ -190,8 +165,9 @@ function validate() {
   }
 
   // Validation de la quantité de tournois
-    if (quantity.trim() == "" || quantity.trim() > 99) {
-    errorQuantity.textContent = "Veuillez saisir un nombre valide de tournois svp";
+  if (quantity.trim() == "" || quantity.trim() > 99) {
+    errorQuantity.textContent =
+      "Veuillez saisir un nombre valide de tournois svp";
     inputQuantity.classList.add("invalid");
     inputQuantity.classList.remove("valid");
     isValid = false;
@@ -215,15 +191,16 @@ function validate() {
     }
   }
 
-  // // Validation de la case à cocher des conditions d'utilisation
-  // if (!checkbox1) {
-  //   alert("Veuillez accepter les conditions d'utilisation.");
-  //   return false;
-  // }
+  // Validation de la case à cocher des conditions d'utilisation
+  if (!checkbox1) {
+    errorCgu.textContent = "Veuillez accepter les conditions d'utilisation svp";
+    inputCheckbox1.style.border = "2px solid red";
+    isValid = false;
+  } else {
+    errorCgu.textContent = "";
+    inputCheckbox1.style.border = "2px solid rgb(0, 255, 21)";
+  }
 
   // Si toutes les validations sont passées, le formulaire est valide
-  //   return true; // Le formulaire est valide
-  // }
-
   return isValid;
 }

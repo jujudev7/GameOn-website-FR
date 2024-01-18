@@ -58,7 +58,7 @@
               action="index.html"
               method="get"
               novalidate
-            onsubmit="return validate();" 
+              onsubmit="return validate();"
             >
               <div class="formData">
                 <label for="firstname">Prénom</label><br />
@@ -107,7 +107,8 @@
               </div>
               <div class="formData">
                 <label for="quantity"
-                  >À combien de tournois GameOn avez-vous déjà participé ?</label
+                  >À combien de tournois GameOn avez-vous déjà participé
+                  ?</label
                 ><br />
                 <input
                   type="number"
@@ -121,7 +122,9 @@
                 <br />
               </div>
               <div class="formData location">
-                  <div class="tournaments">À quel tournoi souhaitez-vous participer cette année ?</div>
+                <div class="tournaments">
+                  À quel tournoi souhaitez-vous participer cette année ?
+                </div>
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -188,16 +191,12 @@
                   <span class="checkbox-icon"></span>
                   Portland</label
                 >
-              <br />
-              <span id="error-location"></span>
+                <br />
+                <span id="error-location"></span>
               </div>
 
-              <div class="formData">
-                <input
-                  class="checkbox-input"
-                  type="checkbox"
-                  id="checkbox1"
-                />
+              <div class="formData cgu">
+                <input class="checkbox-input" type="checkbox" id="checkbox1" />
                 <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
                   J'ai lu et j'accepte les conditions d'utilisation.
@@ -208,6 +207,8 @@
                   <span class="checkbox-icon"></span>
                   Je souhaite être prévenu des prochains évènements.
                 </label>
+                <br />
+                <span id="error-cgu"></span>
                 <br />
               </div>
               <input

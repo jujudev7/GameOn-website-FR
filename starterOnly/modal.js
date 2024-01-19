@@ -137,51 +137,7 @@ function validate() {
     errorEmail.textContent = "";
   }
 
-  //////////////////////////////////////////
-  //  Validation de la date de naissance  //
-  //////////////////////////////////////////
 
-  const birthdateUser = new Date(birthdate);
-  const age = calculateAge(birthdateUser);
-
-  if (birthdate == "") {
-    errorBirthdate.textContent = "Veuillez entrer votre date de naissance svp";
-    inputBirthdate.classList.add("invalid");
-    inputBirthdate.classList.remove("valid");
-    isValid = false;
-  } else if (birthdateUser >= new Date("1900-01-01") && age >= 13) {
-    errorBirthdate.textContent = "";
-    inputBirthdate.classList.add("valid");
-    inputBirthdate.classList.remove("invalid");
-  } else if (birthdateUser < new Date("1900-01-01")) {
-    errorBirthdate.textContent =
-      "Veuillez entrer une date de naissance valide svp";
-    inputBirthdate.classList.add("invalid");
-    inputBirthdate.classList.remove("valid");
-    isValid = false;
-  } else if (age < 13) {
-    errorBirthdate.textContent =
-      "Désolé, vous n'avez pas l'âge requis pour participer !";
-    inputBirthdate.classList.add("invalid");
-    inputBirthdate.classList.remove("valid");
-    isValid = false;
-  }
-
-  function calculateAge(birthdateUser) {
-    const currentDate = new Date();
-    const age = currentDate.getFullYear() - birthdateUser.getFullYear();
-
-    // Vérifier si l'anniversaire de l'utilisateur n'a pas encore eu lieu cette année
-    if (
-      currentDate.getMonth() < birthdateUser.getMonth() ||
-      (currentDate.getMonth() === birthdateUser.getMonth() &&
-        currentDate.getDate() < birthdateUser.getDate())
-    ) {
-      age--;
-    }
-
-    return age;
-  }
 
   // Validation de la quantité de tournois
   if (quantity.trim() == "" || quantity.trim() > 99) {
@@ -219,6 +175,58 @@ function validate() {
     errorCgu.textContent = "";
     inputCheckbox1.style.border = "2px solid rgb(0, 255, 21)";
   }
+
+    //////////////////////////////////////////
+  //  Validation de la date de naissance  //
+  //////////////////////////////////////////
+
+  const birthdateUser = new Date(birthdate);
+  const today = new Date();
+  const thirteenYearsAgo = new Date();
+  thirteenYearsAgo.setFullYear(today.getFullYear() - 13);
+  const _123YearsAgo = new Date();
+  _123YearsAgo.setFullYear(today.getFullYear() - 123);
+
+  // const age = calculateAge(birthdateUser);
+
+  if (birthdate == "" || birthdate == null) {
+    errorBirthdate.textContent = "Veuillez entrer votre date de naissance svp";
+    inputBirthdate.classList.add("invalid");
+    inputBirthdate.classList.remove("valid");
+    isValid = false;
+  } else if (birthdateUser < _123YearsAgo) {
+    errorBirthdate.textContent =
+      "Veuillez entrer une date de naissance valide svp";
+    inputBirthdate.classList.add("invalid");
+    inputBirthdate.classList.remove("valid");
+    isValid = false;
+  } else if (birthdateUser > thirteenYearsAgo) {
+    errorBirthdate.textContent =
+      "Désolé, vous n'avez pas l'âge requis pour participer !";
+    inputBirthdate.classList.add("invalid");
+    inputBirthdate.classList.remove("valid");
+    isValid = false;
+  } else if (birthdateUser >= _123YearsAgo && birthdateUser <= thirteenYearsAgo) {
+    errorBirthdate.textContent = "";
+    inputBirthdate.classList.add("valid");
+    inputBirthdate.classList.remove("invalid");
+  }
+
+  // function calculateAge(birthdateUser) {
+  //   const currentDate = new Date();
+  //   const age = currentDate.getFullYear() - birthdateUser.getFullYear();
+
+  //   // Vérifier si l'anniversaire de l'utilisateur n'a pas encore eu lieu cette année
+  //   if (
+  //     currentDate.getMonth() < birthdateUser.getMonth() ||
+  //     (currentDate.getMonth() === birthdateUser.getMonth() &&
+  //       currentDate.getDate() < birthdateUser.getDate())
+  //   ) {
+  //     age--;
+  //   }
+
+  //   return age;
+  // }
 
   // Si toutes les validations sont passées, le formulaire est valide
   return isValid;

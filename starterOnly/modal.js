@@ -12,6 +12,9 @@ const modalBg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalClose = document.querySelector(".close"); // we select the close btn (x)
+const modalConfirmation = document.querySelector(".bg-confirm");
+const confirmationClose = document.querySelector(".bg-confirm .close"); // we select the close btn (x)
+const closeBtn = document.querySelector(".close-confirmation");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -19,6 +22,11 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalBg.style.display = "block";
+}
+
+// launch modal confirmation
+function launchModalConfirmation() {
+  modalConfirmation.style.display = "block";
 }
 
 // close modal event
@@ -29,6 +37,16 @@ function closeModal() {
   modalBg.style.display = "none";
 } // we create the function closeModal() to modify display property for hiding the modal
 
+// close modal Confirmation event
+confirmationClose.addEventListener("click", closeModalConfirmation); // we add en event on click for close btn with addEventListener()
+
+// close modal confirmation function
+function closeModalConfirmation() {
+  modalConfirmation.style.display = "none";
+} // we create the function closeModalConfirmation() to modify display property for hiding the modal
+
+closeBtn.addEventListener("click", closeModalConfirmation);
+
 const form = document.querySelector("form");
 
 // Ajout d'un écouteur d'événement sur le formulaire pour écouter le submit
@@ -37,6 +55,7 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   if (validate()) {
     closeModal();
+    launchModalConfirmation();
   }
 });
 

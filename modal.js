@@ -56,6 +56,8 @@ form.addEventListener("submit", (event) => {
   if (validate()) {
     closeModal();
     launchModalConfirmation();
+    form.reset(); // on vide les champs du formulaire
+    resetStyleClasses();
   }
 });
 
@@ -137,8 +139,6 @@ function validate() {
     errorEmail.textContent = "";
   }
 
-
-
   // Validation de la quantité de tournois
   if (quantity.trim() == "" || quantity.trim() > 99) {
     errorQuantity.textContent =
@@ -176,7 +176,7 @@ function validate() {
     inputCheckbox1.style.border = "2px solid rgb(0, 255, 21)";
   }
 
-    //////////////////////////////////////////
+  //////////////////////////////////////////
   //  Validation de la date de naissance  //
   //////////////////////////////////////////
 
@@ -206,28 +206,31 @@ function validate() {
     inputBirthdate.classList.add("invalid");
     inputBirthdate.classList.remove("valid");
     isValid = false;
-  } else if (birthdateUser >= _123YearsAgo && birthdateUser <= thirteenYearsAgo) {
+  } else if (
+    birthdateUser >= _123YearsAgo &&
+    birthdateUser <= thirteenYearsAgo
+  ) {
     errorBirthdate.textContent = "";
     inputBirthdate.classList.add("valid");
     inputBirthdate.classList.remove("invalid");
   }
 
-  // function calculateAge(birthdateUser) {
-  //   const currentDate = new Date();
-  //   const age = currentDate.getFullYear() - birthdateUser.getFullYear();
-
-  //   // Vérifier si l'anniversaire de l'utilisateur n'a pas encore eu lieu cette année
-  //   if (
-  //     currentDate.getMonth() < birthdateUser.getMonth() ||
-  //     (currentDate.getMonth() === birthdateUser.getMonth() &&
-  //       currentDate.getDate() < birthdateUser.getDate())
-  //   ) {
-  //     age--;
-  //   }
-
-  //   return age;
-  // }
-
   // Si toutes les validations sont passées, le formulaire est valide
   return isValid;
+}
+
+// Fonction pour réinitialiser les classes de style sur les champs
+function resetStyleClasses() {
+  // Sélectionnez tous les champs qui peuvent avoir des classes de style
+  const fields = document.querySelectorAll('.text-control');
+  const inputCheckbox1 = document.querySelector(".cgu .checkbox-icon");
+
+  // Parcourez les champs et réinitialisez les classes de style
+  fields.forEach(function(field) {
+      field.classList.remove('valid', 'invalid');
+  });
+
+  inputCheckbox1.style.border = "";
+  // Réinitialisez également d'autres éléments s'il y a lieu
+  // (par exemple, radio buttons, checkboxes, etc.)
 }

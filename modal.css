@@ -35,7 +35,7 @@ p {
 
 .topnav {
   overflow: hidden;
-  margin: 2vw;
+  margin: 1.8vw;
 }
 .header-logo {
   float: left;
@@ -613,6 +613,10 @@ input[type="radio"]:checked + label .checkbox-icon {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+  }
+
+  .header-logo {
+    padding-top: 5px;
   }
 
   .content {

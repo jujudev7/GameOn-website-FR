@@ -40,7 +40,9 @@ p {
 .header-logo {
   float: left;
   padding-left: 2vw;
+  padding-top: 5px;
 }
+
 .main-navbar {
   float: right;
 }
@@ -559,6 +561,10 @@ input[type="radio"]:checked + label .checkbox-icon {
     padding: 6px 12px;
   }
 
+  .header-logo {
+    padding-top: unset;
+  }
+
   .topnav a.active {
     text-underline-offset: 4px;
   }
@@ -640,7 +646,7 @@ input[type="radio"]:checked + label .checkbox-icon {
 
   .header-logo img {
     width: 120px;
-    padding: 12px;
+    padding: 8px 12px;
   }
 
   .hero-headline {

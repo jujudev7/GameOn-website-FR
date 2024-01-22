@@ -1,7 +1,8 @@
 @font-face {
-	font-family: 'DM Sans';
-	src: url(DM_Sans/DMSans-Regular.ttf) format(‘truetype’),
-	    url(DM_Sans/DMSans-Medium.ttf) format(‘truetype’)
+  font-family: "DM Sans";
+  src: url(DM_Sans/DMSans-Regular.ttf) format('truetype');
+  font-family: "DM Sans Medium";
+  src: url(DM_Sans/DMSans-Medium.ttf) format('truetype');
 }
 
 :root {
@@ -32,16 +33,13 @@ p {
   padding: 0.5vw;
 }
 
-img {
-  padding-right: 1rem;
-}
-
 .topnav {
   overflow: hidden;
-  margin: 3.5%;
+  margin: 2vw;
 }
 .header-logo {
   float: left;
+  padding-left: 2vw;
 }
 .main-navbar {
   float: right;
@@ -418,7 +416,7 @@ input[type="radio"]:checked + label .checkbox-icon {
   font-size: 16px;
 }
 .hero-section {
-  min-height: 93vh;
+  max-height: 70vh;
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -485,24 +483,20 @@ input[type="radio"]:checked + label .checkbox-icon {
   color: #fe142f;
   padding: 0;
   font-size: 1rem;
-  margin: 60px 0 30px;
+  margin: 40px 20px;
   font-weight: bolder;
 }
 .hero-section > .btn-signup {
   display: none;
 }
-footer {
-  padding-left: 2vw;
-  padding-right: 2vw;
-  margin: 0 20px;
-}
+
 
 @media screen and (max-width: 1024px) {
-  .topnav {
+  /* .topnav {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-  }
+  } */
   .header-logo img {
     width: 200px;
     padding: 6px;
@@ -545,6 +539,15 @@ footer {
   .hero-headline {
     font-size: 4.5rem;
   }
+  footer {
+    padding-left: 2vw;
+    padding-right: 2vw;
+    margin: 0 20px;
+  }
+  .copyrights {
+    margin-top: 10px;
+    margin-left: 0px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -563,6 +566,7 @@ footer {
   .hero-section {
     display: block;
     box-shadow: unset;
+    max-height: unset;
   }
   .hero-content {
     background: #fff;
@@ -576,7 +580,8 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 3.5rem;
+    font-size: 3.4rem;
+    font-family: 'DM Sans Medium';
   }
   .hero-text {
     width: unset;
@@ -593,7 +598,6 @@ footer {
     padding: 12px 35px;
   }
   .copyrights {
-    margin-top: 10px;
     text-align: center;
   }
 }
@@ -671,21 +675,22 @@ footer {
   .hero-section {
     min-height: 53vh;
   }
-
   .confirmation {
     height: 77vh;
     font-size: 1.7em;
-}
-
+  }
   .hero-img img {
     margin-top: 20px;
+  }
+
+  .btn-submit {
+    font-size: 0.8rem;
   }
 
   .hero-section > .btn-signup {
     padding: 8px 35px;
     font-size: 0.8em;
   }
-
   .copyrights {
     margin-top: 0;
     font-size: 0.7em;

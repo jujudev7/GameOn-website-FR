@@ -24,6 +24,7 @@
         <a href="#"><span class="link">À propos</span></a>
         <a href="#"><span class="link">Contact</span></a>
         <a href="#"><span class="link">Évènements passés</span></a>
+        <!-- we call editNav function when the user click on the icon menu on responsive -->
         <a href="javascript:void(0);" class="icon" onclick="editNav()">
           <i class="fa fa-bars"></i>
         </a>
@@ -60,6 +61,7 @@
               novalidate
               onsubmit="return validate();"
             >
+            <!-- we ask to return the validate() function when the user click on submit  -->
               <div class="formData">
                 <label for="firstname">Prénom</label><br>
                 <input
@@ -69,6 +71,7 @@
                   name="firstname"
                   minlength="2"
                >
+               <!-- adding a span error-"field" in order to send an error text message if needed -->
                 <span id="error-firstname"></span>
                 <br>
               </div>
@@ -199,6 +202,7 @@
 
               <div class="formData cgu">
                 <input class="checkbox-input" type="checkbox" id="checkbox1">
+                <!-- Deleting 'checked' in order to not validate the field on behalf of the user -->
                 <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et j'accepte les conditions d'utilisation.
@@ -222,6 +226,8 @@
           </div>
         </div>
       </div>
+
+      <!-- Adding Confirmation Modal -->
       <div class="bg-confirm">
         <div class="content">
           <span class="close"></span>

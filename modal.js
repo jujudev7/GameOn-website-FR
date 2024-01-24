@@ -30,39 +30,39 @@ function launchModalConfirmation() {
 }
 
 // close modal event
-modalClose.addEventListener("click", closeModal); // we add en event on click for close btn with addEventListener()
+modalClose.addEventListener("click", closeModal); // we listen if the user click on the cross btn, if yes, we close the modal
 
 // close modal function
 function closeModal() {
-  modalBg.style.display = "none";
-} // we create the function closeModal() to modify display property for hiding the modal
+  modalBg.style.display = "none"; // hide the modal
+} 
 
 // close modal Confirmation event
-confirmationClose.addEventListener("click", closeModalConfirmation); // we add en event on click for close btn with addEventListener()
+confirmationClose.addEventListener("click", closeModalConfirmation); // we listen if the user click on the cross btn, if yes, we close the confirmation modal
 
 // close modal confirmation function
 function closeModalConfirmation() {
-  modalConfirmation.style.display = "none";
-} // we create the function closeModalConfirmation() to modify display property for hiding the modal
+  modalConfirmation.style.display = "none"; // hide the confirmation modal
+} 
 
-closeBtn.addEventListener("click", closeModalConfirmation);
+closeBtn.addEventListener("click", closeModalConfirmation); // we listen if the user click on the close confirmation btn, if yes, we close the confirmation modal
 
 const form = document.querySelector("form");
 
-// Ajout d'un écouteur d'événement sur le formulaire pour écouter le submit
+// we listen the form when user click on submit
 form.addEventListener("submit", (event) => {
-  // On empêche le comportement par défaut
+  // we prevent the browser not to execute the default behavior associated with the event (submitting and reloading the page) 
   event.preventDefault();
   if (validate()) {
     closeModal();
     launchModalConfirmation();
-    form.reset(); // on vide les champs du formulaire
-    resetStyleClasses();
+    form.reset(); // we reset the values of the form, empty out the fields
+    resetStyleClasses(); // we remove classes "valid" / "invalid"
   }
 });
 
 function validate() {
-  // Récupérer les valeurs des champs
+  // we get the values of the fields
   const firstname = document.getElementById("firstname").value;
   const lastname = document.getElementById("lastname").value;
   const email = document.getElementById("email").value;
@@ -71,7 +71,8 @@ function validate() {
   const location = document.querySelector('input[name="location"]:checked');
   const checkbox1 = document.getElementById("checkbox1").checked;
 
-  const inputFirstname = document.getElementById("firstname"); // on sélectionne chaque input afin d'indiquer à l'utilisateur si le champ est valide ou non
+  // we select all inputs, in order to show to the user if the field is valid or not
+  const inputFirstname = document.getElementById("firstname"); 
   const inputLastname = document.getElementById("lastname");
   const inputEmail = document.getElementById("email");
   const inputBirthdate = document.getElementById("birthdate");
@@ -80,13 +81,14 @@ function validate() {
   const inputCheckbox1 = document.querySelector(".cgu .checkbox-icon");
 
   const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  // ^: Début de la chaîne.
-  // [^\s@]+: Un ou plusieurs caractères qui ne sont ni des espaces ni des "@", pour la partie avant le "@".
-  // @: Le caractère "@".
-  // [^\s@]+: Un ou plusieurs caractères qui ne sont ni des espaces ni des "@", pour la partie après le "@".
-  // \.: Le caractère "." (point), qui est échappé car il a une signification spéciale en regex.
-  // [^\s@]{2,}: indique que la séquence de caractères après le dernier point "." (l'extension du nom de domaine) doit contenir au minimum 2 caractères qui ne sont ni des espaces ni des "@" jusqu'à la fin de la chaîne $.
+  // ^: Start of the string
+  // [^\s@]+: One or more characters that are neither spaces nor '@' for the part before the '@'".
+  // @: the character "@".
+  // [^\s@]+: One or more characters that are neither spaces nor '@' for the part after the '@'".
+  // \.: the character "." (dot),  that is escaped because it has a special meaning in regex.
+  // [^\s@]{2,}: indicates that the sequence of characters after the last dot '.' (the domain name extension) must contain at least 2 characters that are neither spaces nor '@' until the end of the string $."
 
+  // we select "error zones" to inject texte when we find an error
   const errorFirstname = document.getElementById("error-firstname");
   const errorLastname = document.getElementById("error-lastname");
   const errorEmail = document.getElementById("error-email");
@@ -97,7 +99,7 @@ function validate() {
 
   let isValid = true;
 
-  // // Validation du prénom
+  // Firstname validation
   if (firstname.trim() == "") {
     errorFirstname.textContent = "Veuillez renseigner votre prénom svp";
     inputFirstname.classList.add("invalid");
@@ -112,7 +114,7 @@ function validate() {
     errorFirstname.textContent = "";
   }
 
-  // // Validation du nom
+  // Lastname validation 
   if (lastname.trim() == "") {
     errorLastname.textContent = "Veuillez renseigner votre nom de famille svp";
     inputLastname.classList.add("invalid");
@@ -128,7 +130,7 @@ function validate() {
     errorLastname.textContent = "";
   }
 
-  // Validation de l'e-mail
+  // Email validation
   if (!emailRegExp.test(email)) {
     errorEmail.textContent = "Veuillez saisir une adresse e-mail valide svp";
     inputEmail.classList.add("invalid");
@@ -139,7 +141,7 @@ function validate() {
     errorEmail.textContent = "";
   }
 
-  // Validation de la quantité de tournois
+  // Quantity validation
   if (quantity.trim() == "" || quantity.trim() > 99) {
     errorQuantity.textContent =
       "Veuillez saisir un nombre valide de tournois svp";
@@ -152,7 +154,7 @@ function validate() {
     errorQuantity.textContent = "";
   }
 
-  // Validation choix ville
+  // Location validation
   if (location == null) {
     errorLocation.textContent = "Veuillez choisir une ville svp";
 
@@ -166,7 +168,7 @@ function validate() {
     }
   }
 
-  // Validation de la case à cocher des conditions d'utilisation
+  // Terms and Conditions validation 
   if (!checkbox1) {
     errorCgu.textContent = "Veuillez accepter les conditions d'utilisation svp";
     inputCheckbox1.style.border = "2px solid red";
@@ -176,8 +178,8 @@ function validate() {
     inputCheckbox1.style.border = "2px solid rgb(0, 255, 21)";
   }
 
-  //////////////////////////////////////////
-  //  Validation de la date de naissance  //
+  ////////////////////////////////////////////
+  //         Birthdate Validation          //
   //////////////////////////////////////////
 
   const birthdateUser = new Date(birthdate);
@@ -186,8 +188,6 @@ function validate() {
   thirteenYearsAgo.setFullYear(today.getFullYear() - 13);
   const _123YearsAgo = new Date();
   _123YearsAgo.setFullYear(today.getFullYear() - 123);
-
-  // const age = calculateAge(birthdateUser);
 
   if (birthdate == "" || birthdate == null) {
     errorBirthdate.textContent = "Veuillez entrer votre date de naissance svp";
@@ -215,22 +215,18 @@ function validate() {
     inputBirthdate.classList.remove("invalid");
   }
 
-  // Si toutes les validations sont passées, le formulaire est valide
+  // If all validations are OK, the form is valid
   return isValid;
 }
 
-// Fonction pour réinitialiser les classes de style sur les champs
+// we remove classes "valid" / "invalid"
 function resetStyleClasses() {
-  // Sélectionnez tous les champs qui peuvent avoir des classes de style
   const fields = document.querySelectorAll('.text-control');
   const inputCheckbox1 = document.querySelector(".cgu .checkbox-icon");
 
-  // Parcourez les champs et réinitialisez les classes de style
   fields.forEach(function(field) {
       field.classList.remove('valid', 'invalid');
   });
 
   inputCheckbox1.style.border = "";
-  // Réinitialisez également d'autres éléments s'il y a lieu
-  // (par exemple, radio buttons, checkboxes, etc.)
 }

@@ -187,6 +187,8 @@ input {
   outline: none;
 }
 
+/* Formatting of Errors and Validations */
+
 #error-firstname,
 #error-lastname,
 #error-email,
@@ -492,13 +494,10 @@ input[type="radio"]:checked + label .checkbox-icon {
   display: none;
 }
 
+/* Responsive Design Management */
 
 @media screen and (max-width: 1024px) {
-  /* .topnav {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  } */
+
   .header-logo img {
     width: 200px;
     padding: 6px;

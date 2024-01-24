@@ -178,16 +178,17 @@ function validate() {
     inputCheckbox1.style.border = "2px solid rgb(0, 255, 21)";
   }
 
-  ////////////////////////////////////////////
-  //         Birthdate Validation          //
+    //////////////////////////////////////////
+   //         Birthdate Validation         //
   //////////////////////////////////////////
 
-  const birthdateUser = new Date(birthdate);
-  const today = new Date();
-  const thirteenYearsAgo = new Date();
-  thirteenYearsAgo.setFullYear(today.getFullYear() - 13);
+  // creating Date objects
+  const birthdateUser = new Date(birthdate); // birthdate of the user
+  const today = new Date(); // the current date and time
+  const thirteenYearsAgo = new Date(); 
+  thirteenYearsAgo.setFullYear(today.getFullYear() - 13); // set the value of the object 13 years before the current date
   const _123YearsAgo = new Date();
-  _123YearsAgo.setFullYear(today.getFullYear() - 123);
+  _123YearsAgo.setFullYear(today.getFullYear() - 123); // set the value of the object 123 years before the current date
 
   if (birthdate == "" || birthdate == null) {
     errorBirthdate.textContent = "Veuillez entrer votre date de naissance svp";
@@ -219,7 +220,7 @@ function validate() {
   return isValid;
 }
 
-// we remove classes "valid" / "invalid"
+// we remove classes "valid" / "invalid" when form is valid
 function resetStyleClasses() {
   const fields = document.querySelectorAll('.text-control');
   const inputCheckbox1 = document.querySelector(".cgu .checkbox-icon");

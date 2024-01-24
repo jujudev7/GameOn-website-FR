@@ -279,7 +279,6 @@ input[data-error]::after {
   opacity: 0;
 }
 input[type="radio"]:checked + label .checkbox-icon {
-  /* border: 2px solid #279e7a; */
   border: 2px solid rgb(0, 255, 21);
 }
 .checkbox-input {

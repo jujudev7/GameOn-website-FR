@@ -1,5 +1,23 @@
-# Projet GameOn
-1. Forkez ce repo ;
-2. Il est conseillé d'utiliser VisualStudio Code et vous pouvez utiliser Docker, mais ce n'est pas obligatoire ;
-3. Il n'y a aucune dépendance ;
-4. Vous ne devez utiliser que du CSS personnalisé et du JavaScript pur, sans jQuery, Bootstrap ou autre librairie.
+# GameOn Project 🕹️
+
+GameOn is a website specialized in conferences and video games competitions.
+
+Goal : Create a landing page with a form registration in Vanilla Javascript.
+
+Forked link : https://github.com/OpenClassrooms-Student-Center/GameOn-website-FR/ 
+
+## Project's Objectives 🎯
+
+- Validation inputs in JavaScript
+
+- Display error messages if invalid
+
+- Open/Close modal (form & confirmation)
+
+- Responsive design
+
+- Testing features, input, responsive of the project
+
+## Demo 🔗
+
+▶️ https://jujudev7.github.io/GameOn-website-FR/

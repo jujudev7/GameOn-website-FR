@@ -77,7 +77,7 @@ function validate() {
   const inputEmail = document.getElementById("email");
   const inputBirthdate = document.getElementById("birthdate");
   const inputQuantity = document.getElementById("quantity");
-  const radioBtnIcons = document.querySelectorAll(".location .checkbox-icon");
+  const radioBtnIcons = document.querySelectorAll(".location .checkbox-icon"); 
   const inputCheckbox1 = document.querySelector(".cgu .checkbox-icon");
 
   const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -131,7 +131,7 @@ function validate() {
   }
 
   // Email validation
-  if (!emailRegExp.test(email)) {
+  if (!emailRegExp.test(email)) {  // = if (emailRegExp.test(email) == false) {
     errorEmail.textContent = "Veuillez saisir une adresse e-mail valide svp";
     inputEmail.classList.add("invalid");
     inputEmail.classList.remove("valid");
